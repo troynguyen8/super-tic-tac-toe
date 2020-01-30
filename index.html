@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset=utf-8>
+  <title></title>
+  <link rel="stylesheet" href="index.css"></style>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous">
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous"></script>
+  <script src="index.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <h1 class="h1 text-center">Super Tic Tac Toe</h1>
+    <div class="row d-flex justify-content-center my-5">
+      <table class="super-board">
+        <tr class="super-board-row">
+          <td class="super-cell-0">
+            <table>
+              <tr>
+                <td>
+                  <button class="00"></button>
+                </td>
+                <td>
+                  <button class="01"></button>
+                </td>
+                <td>
+                  <button class="02"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="03"></button>
+                </td>
+                <td>
+                  <button class="04"></button>
+                </td>
+                <td>
+                  <button class="05"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="06"></button>
+                </td>
+                <td>
+                  <button class="07"></button>
+                </td>
+                <td>
+                  <button class="08"></button>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="super-cell-1">
+            <table>
+              <tr>
+                <td>
+                  <button class="10"></button>
+                </td>
+                <td>
+                  <button class="11"></button>
+                </td>
+                <td>
+                  <button class="12"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="13"></button>
+                </td>
+                <td>
+                  <button class="14"></button>
+                </td>
+                <td>
+                  <button class="15"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="16"></button>
+                </td>
+                <td>
+                  <button class="17"></button>
+                </td>
+                <td>
+                  <button class="18"></button>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="super-cell-2">
+            <table>
+              <tr>
+                <td>
+                  <button class="20"></button>
+                </td>
+                <td>
+                  <button class="21"></button>
+                </td>
+                <td>
+                  <button class="22"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="23"></button>
+                </td>
+                <td>
+                  <button class="24"></button>
+                </td>
+                <td>
+                  <button class="25"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="26"></button>
+                </td>
+                <td>
+                  <button class="27"></button>
+                </td>
+                <td>
+                  <button class="28"></button>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="super-board-row">
+          <td class="super-cell-3">
+            <table>
+              <tr>
+                <td>
+                  <button class="30"></button>
+                </td>
+                <td>
+                  <button class="31"></button>
+                </td>
+                <td>
+                  <button class="32"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="33"></button>
+                </td>
+                <td>
+                  <button class="34"></button>
+                </td>
+                <td>
+                  <button class="35"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="36"></button>
+                </td>
+                <td>
+                  <button class="37"></button>
+                </td>
+                <td>
+                  <button class="38"></button>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="super-cell-4">
+            <table>
+              <tr>
+                <td>
+                  <button class="40"></button>
+                </td>
+                <td>
+                  <button class="41"></button>
+                </td>
+                <td>
+                  <button class="42"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="43"></button>
+                </td>
+                <td>
+                  <button class="44"></button>
+                </td>
+                <td>
+                  <button class="45"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="46"></button>
+                </td>
+                <td>
+                  <button class="47"></button>
+                </td>
+                <td>
+                  <button class="48"></button>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="super-cell-5">
+            <table>
+              <tr>
+                <td>
+                  <button class="50"></button>
+                </td>
+                <td>
+                  <button class="51"></button>
+                </td>
+                <td>
+                  <button class="52"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="53"></button>
+                </td>
+                <td>
+                  <button class="54"></button>
+                </td>
+                <td>
+                  <button class="55"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="56"></button>
+                </td>
+                <td>
+                  <button class="57"></button>
+                </td>
+                <td>
+                  <button class="58"></button>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="super-board-row">
+          <td class="super-cell-6">
+            <table>
+              <tr>
+                <td>
+                  <button class="60"></button>
+                </td>
+                <td>
+                  <button class="61"></button>
+                </td>
+                <td>
+                  <button class="62"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="63"></button>
+                </td>
+                <td>
+                  <button class="64"></button>
+                </td>
+                <td>
+                  <button class="65"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="66"></button>
+                </td>
+                <td>
+                  <button class="67"></button>
+                </td>
+                <td>
+                  <button class="68"></button>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="super-cell-7">
+            <table>
+              <tr>
+                <td>
+                  <button class="70"></button>
+                </td>
+                <td>
+                  <button class="71"></button>
+                </td>
+                <td>
+                  <button class="72"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="73"></button>
+                </td>
+                <td>
+                  <button class="74"></button>
+                </td>
+                <td>
+                  <button class="75"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="76"></button>
+                </td>
+                <td>
+                  <button class="77"></button>
+                </td>
+                <td>
+                  <button class="78"></button>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="super-cell-8">
+            <table>
+              <tr>
+                <td>
+                  <button class="80"></button>
+                </td>
+                <td>
+                  <button class="81"></button>
+                </td>
+                <td>
+                  <button class="82"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="83"></button>
+                </td>
+                <td>
+                  <button class="84"></button>
+                </td>
+                <td>
+                  <button class="85"></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class=86></button>
+                </td>
+                <td>
+                  <button class=87></button>
+                </td>
+                <td>
+                  <button class=88></button>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <p class="describing-text">Next Player: <span class="next-player">🔴</span></p>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <button class="btn btn-primary d-none replay-button" onclick="window.location.reload()">Play Again?</button>
+    </div>
+  </div>
+</body>
+
+</html>
