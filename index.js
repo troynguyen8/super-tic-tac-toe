@@ -1,21 +1,21 @@
 class Board {
-  NEXT_PLAYER_MAP = {
+  static NEXT_PLAYER_MAP = {
     '🔴': '🔵',
     '🔵': '🔴',
   };
 
-  PLAYER_TO_COLOR_MAP = {
+  static PLAYER_TO_COLOR_MAP = {
     '🔴': 'red',
     '🔵': 'blue',
   };
 
-  SUB_CELL_STATES = {
+  static SUB_CELL_STATES = {
     empty: undefined,
     blue: 'blue',
     red: 'red',
   };
 
-  SUPER_CELL_STATES = {
+  static SUPER_CELL_STATES = {
     playable: 'playable',
     unplayable: 'unplayable',
     redTaken: 'redTaken',
@@ -23,7 +23,7 @@ class Board {
     tied: 'tied',
   };
 
-  WIN_STATES = [
+  static WIN_STATES = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -38,22 +38,26 @@ class Board {
 
   _superCellStates = [];
 
-  constructor() {
+  constructor(onInit) {
     this.currentPlayer = '🔴';
 
     for (let i = 0; i < 9; i++) {
-      this._boardState.push(Array(9).fill(this.SUB_CELL_STATES.empty));
-      this._superCellStates = Array(9).fill(this.SUPER_CELL_STATES.playable);
+      this._boardState.push(Array(9).fill(Board.SUB_CELL_STATES.empty));
+      this._superCellStates = Array(9).fill(Board.SUPER_CELL_STATES.unplayable);
     }
+
+    this.setBoardForNextMove(4, () => {});
+
+    onInit(this._superCellStates);
   }
 
   updatePlayer() {
-    this.currentPlayer = this.NEXT_PLAYER_MAP[this.currentPlayer];
+    this.currentPlayer = Board.NEXT_PLAYER_MAP[this.currentPlayer];
   }
 
   updateBoardState(superCellIndex, subCellIndex) {
     this._boardState[superCellIndex][subCellIndex] =
-      this.SUB_CELL_STATES[this.PLAYER_TO_COLOR_MAP[this.currentPlayer]];
+      Board.SUB_CELL_STATES[Board.PLAYER_TO_COLOR_MAP[this.currentPlayer]];
   }
 
   checkSuperCellWin(superCellIndex, onCellWin, onCellTie) {
@@ -61,30 +65,30 @@ class Board {
     let victoriousPlayer;
     const superCell = this._boardState[superCellIndex];
 
-    for (let i = 0; i < this.WIN_STATES.length; i++) {
-      const [i1, i2, i3] = this.WIN_STATES[i];
+    for (let i = 0; i < Board.WIN_STATES.length; i++) {
+      const [i1, i2, i3] = Board.WIN_STATES[i];
       if (superCell[i1] === superCell[i2] && superCell[i2] === superCell[i3] && superCell[i1] === superCell[i3]) {
-        if (superCell[i1] === this.SUB_CELL_STATES.red) {
+        if (superCell[i1] === Board.SUB_CELL_STATES.red) {
           superCellWon = true;
-          victoriousPlayer = this.SUB_CELL_STATES.red;
+          victoriousPlayer = Board.SUB_CELL_STATES.red;
           break;
-        } else if (superCell[i1] === this.SUB_CELL_STATES.blue) {
+        } else if (superCell[i1] === Board.SUB_CELL_STATES.blue) {
           superCellWon = true;
-          victoriousPlayer = this.SUB_CELL_STATES.blue;
+          victoriousPlayer = Board.SUB_CELL_STATES.blue;
           break;
         }
       }
     }
 
     if (superCellWon) {
-      if (victoriousPlayer === this.SUB_CELL_STATES.red) {
-        this._superCellStates[superCellIndex] = this.SUPER_CELL_STATES.redTaken;
-        onCellWin(this.SUB_CELL_STATES.red);
+      if (victoriousPlayer === Board.SUB_CELL_STATES.red) {
+        this._superCellStates[superCellIndex] = Board.SUPER_CELL_STATES.redTaken;
+        onCellWin(Board.SUB_CELL_STATES.red);
       } else {
-        this._superCellStates[superCellIndex] = this.SUPER_CELL_STATES.blueTaken;
-        onCellWin(this.SUB_CELL_STATES.blue)
+        this._superCellStates[superCellIndex] = Board.SUPER_CELL_STATES.blueTaken;
+        onCellWin(Board.SUB_CELL_STATES.blue)
       }
-    } else if (!superCell.some((subCell) => subCell === this.SUB_CELL_STATES.empty)) {
+    } else if (!superCell.some((subCell) => subCell === Board.SUB_CELL_STATES.empty)) {
       onCellTie();
     }
   }
@@ -93,12 +97,12 @@ class Board {
     let gameWonOutright = false;
     let victoriousPlayer;
 
-    for (let i = 0; i < this.WIN_STATES.length; i++) {
-      const [i1, i2, i3] = this.WIN_STATES[i];
+    for (let i = 0; i < Board.WIN_STATES.length; i++) {
+      const [i1, i2, i3] = Board.WIN_STATES[i];
       if (this._superCellStates[i1] === this._superCellStates[i2]
         && this._superCellStates[i2] === this._superCellStates[i3]
         && this._superCellStates[i1] === this._superCellStates[i3]
-        && (this._superCellStates[i1] === this.SUPER_CELL_STATES.redTaken || this._superCellStates[i1] === this.SUPER_CELL_STATES.blueTaken)
+        && (this._superCellStates[i1] === Board.SUPER_CELL_STATES.redTaken || this._superCellStates[i1] === Board.SUPER_CELL_STATES.blueTaken)
       ) {
         gameWonOutright = true;
         victoriousPlayer = this.currentPlayer;
@@ -110,7 +114,7 @@ class Board {
   }
 
   setBoardForNextMove(targetSuperCellIndex, onBoardSet) {
-    const { playable, unplayable, redTaken, blueTaken, tied } = this.SUPER_CELL_STATES;
+    const { playable, unplayable, redTaken, blueTaken, tied } = Board.SUPER_CELL_STATES;
 
     const superCellIsPlayable = (cell) => cell !== redTaken && cell !== blueTaken && cell !== tied;
     
@@ -121,7 +125,7 @@ class Board {
     let nextPlayableCellIndices = [];
     if (nextCellStateAlreadyDetermined) {
       this._boardState[targetSuperCellIndex].forEach((subCellState, index) => {
-        if (subCellState === this.SUB_CELL_STATES.empty && superCellIsPlayable(this._superCellStates[index])) {
+        if (subCellState === Board.SUB_CELL_STATES.empty && superCellIsPlayable(this._superCellStates[index])) {
           nextPlayableCellIndices.push(index);
         }
       });
@@ -147,7 +151,23 @@ const updateNextPlayerText = (newPlayer) => {
 };
 
 $(() => {
-  const board = new Board();
+  const reflectDomBoardWithSuperCellStates = (superCellStates) => {
+    superCellStates.forEach((superCellState, index) => {
+      const $superCell = $(`.super-cell-${index}`);
+
+      if (superCellState === Board.SUPER_CELL_STATES.unplayable) {
+        $superCell.addClass('unplayable');
+        $superCell.find('button').attr('disabled', true);
+      } else if (superCellState === Board.SUPER_CELL_STATES.playable) {
+        $superCell.removeClass('unplayable');
+        $superCell.find('button').attr('disabled', false);
+      } else {
+        $superCell.removeClass('unplayable');
+      }
+    });
+  };
+
+  const board = new Board(reflectDomBoardWithSuperCellStates);
 
   $('.super-board button').click((event) => {
     const $subCell = $(event.toElement);
@@ -167,7 +187,7 @@ $(() => {
         .parent()
         .parent();
       
-      if (superCellWinner === board.SUB_CELL_STATES.red) {
+      if (superCellWinner === Board.SUB_CELL_STATES.red) {
         $superCellTable.addClass('red-taken');
       } else {
         $superCellTable.addClass('blue-taken');
@@ -196,21 +216,7 @@ $(() => {
     });
 
     if (!gameWon) {
-      board.setBoardForNextMove(subCellIndex, (superCellStates) => {
-        superCellStates.forEach((superCellState, index) => {
-          const $superCell = $(`.super-cell-${index}`);
-  
-          if (superCellState === board.SUPER_CELL_STATES.unplayable) {
-            $superCell.addClass('unplayable');
-            $superCell.find('button').attr('disabled', true);
-          } else if (superCellState === board.SUPER_CELL_STATES.playable) {
-            $superCell.removeClass('unplayable');
-            $superCell.find('button').attr('disabled', false);
-          } else {
-            $superCell.removeClass('unplayable');
-          }
-        });
-      });
+      board.setBoardForNextMove(subCellIndex, reflectDomBoardWithSuperCellStates);
   
       board.updatePlayer();
   
