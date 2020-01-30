@@ -170,7 +170,10 @@ $(() => {
   const board = new Board(reflectDomBoardWithSuperCellStates);
 
   $('.super-board button').click((event) => {
-    const $subCell = $(event.toElement);
+    const $subCell = $(event.target);
+
+    if ($subCell.html()) return;
+
     $subCell.html(board.currentPlayer);
     $subCell.prop('disabled', true);
 
