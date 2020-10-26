@@ -4,7 +4,7 @@ A HTML/CSS/JS with JQuery powered web application to play a modified variant of 
 
 ## Running the application
 
-Open `index.html` in a modern browser. The site is currently deployed to [netlify](supertictactoe.netlify.app).
+Open `index.html` in a modern browser. The site is currently deployed to [netlify](https://supertictactoe.netlify.app/).
 
 ## Rules
 
